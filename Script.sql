@@ -1,15 +1,17 @@
 
 
-SELECT 
+SELECT
     dt1.[Schema]
     ,dt1.TableName
     ,dt1.IndexType
     ,dt2.PartitionCount
     ,CASE
         WHEN dt1.Rows BETWEEN 0 AND 999 THEN 'Under one thousand'
-        WHEN dt1.Rows BETWEEN 1000 AND 999999 THEN 'Thousand'
-        WHEN dt1.Rows BETWEEN 1000000 AND 999999999 THEN 'Million'
-        WHEN dt1.Rows>=1000000000 THEN 'Billion'
+        WHEN dt1.Rows BETWEEN 1000 AND 999999 THEN 'Thousands'
+        WHEN dt1.Rows BETWEEN 1000000 AND 9999999 THEN 'Millions'
+        WHEN dt1.Rows BETWEEN 10000000 AND 99999999 THEN 'Tens of millions'
+        WHEN dt1.Rows BETWEEN 100000000 AND 999999999 THEN 'Hundreds of millions'
+        WHEN dt1.Rows>=1000000000 THEN 'Billions'
     END AS 'RowCountMagnitude'
     ,dt1.Rows
     ,dt3.Columns
