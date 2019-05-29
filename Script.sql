@@ -6,7 +6,8 @@ SELECT
     ,dt1.IndexType
     ,dt2.PartitionCount
     ,CASE
-        WHEN dt1.Rows BETWEEN 0 AND 999 THEN 'Under one thousand'
+        WHEN dt1.Rows=0 THEN 'None'
+        WHEN dt1.Rows BETWEEN 1 AND 999 THEN 'Under one thousand'
         WHEN dt1.Rows BETWEEN 1000 AND 999999 THEN 'Thousands'
         WHEN dt1.Rows BETWEEN 1000000 AND 9999999 THEN 'Millions'
         WHEN dt1.Rows BETWEEN 10000000 AND 99999999 THEN 'Tens of millions'
